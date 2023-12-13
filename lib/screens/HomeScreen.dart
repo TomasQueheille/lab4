@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:laboratorio4proyecto2/screens/cities_weather.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +6,7 @@ class HomeScreen extends StatelessWidget {
 
   HomeScreen({required this.toggleTheme});
 
-  late List<Map<String, dynamic>> citiesWeather = [];
+  final List<CitiesWeather> citiesWeather = citiesweather_item;
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +28,15 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: citiesweather_item.isEmpty
-          ? ListView.builder(
-              itemCount: citiesweather_item.length,
-              itemBuilder: (context, index) {
-                return _buildCityCard(context, citiesweather_item[index]);
-              },
-            )
-          : Center(
+      body: citiesWeather.isEmpty
+          ? Center(
               child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: citiesWeather.length,
+              itemBuilder: (context, index) {
+                return _buildCityCard(context, citiesWeather[index]);
+              },
             ),
     );
   }
@@ -71,6 +69,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 
 
