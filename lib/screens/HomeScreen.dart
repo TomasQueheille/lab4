@@ -42,6 +42,10 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildCityCard(BuildContext context, CitiesWeather cityWeather) {
+    final String? cityName = cityWeather.city;
+
+    // Usar el operador ?? para asignar un valor por defecto al argumento si es null
+
     return Card(
       elevation: 4,
       margin: EdgeInsets.all(8),
@@ -49,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         leading: CircleAvatar(
           backgroundImage: NetworkImage(cityWeather.image),
         ),
-        title: Text(cityWeather.city),
+        title: Text(cityName ?? 'No se seleccionó ninguna ciudad'),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -62,7 +66,7 @@ class HomeScreen extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/lista_registros',
-            arguments: cityWeather.city,
+            arguments: cityName ?? 'No se seleccionó ninguna ciudad',
           );
         },
       ),
